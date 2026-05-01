@@ -16,7 +16,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-app.use('/', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/crypto', cryptoRoutes);
 
 mongoose
