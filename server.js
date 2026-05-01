@@ -9,8 +9,19 @@ const cryptoRoutes = require('./routes/crypto');
 
 const app = express();
 
+const allowedOrigins = [
+  'https://franklinnn099-crypto-app.netlify.app',
+  'http://localhost:5173',
+];
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json());
